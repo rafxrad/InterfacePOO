@@ -1,65 +1,75 @@
 package banco.modelo;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.ArrayList;  
 import java.util.HashSet;
 import java.util.List;
 
-public class Cliente {
+public class ClientePessoaJuridica implements ICliente, Serializable {
 
-	String cpf;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	String cnpj;
 	String nome;
 	String dataNascimento;
-	
 	String email;
 	
 	HashSet<String> telefones = new HashSet<String>();
 	
 	private List<IConta> contas = new ArrayList<IConta>();
 	
-	public Cliente(String cpf, String nome, String dataNascimento) {
-		super();
-		this.cpf = cpf;
+	public ClientePessoaJuridica(String cnpj, String nome, String dataNascimento, String email) {
+		this.cnpj = cnpj;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
+		this.email = email;
+	}
+	
+	public ClientePessoaJuridica(String cnpj)
+	{
+		this.cnpj = cnpj;
 	}
 
 	
 
+
+
+	
 	@Override
 	public String toString() {
-		return "Cliente [cpf=" + cpf + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", telefones="
-				+ telefones + ", contas=" + contas + "]";
+		return "ClientePessoaJuridica [cnpj=" + cnpj + ", nome=" + nome + ", dataNascimento=" + dataNascimento
+				+ ", email=" + email + ", telefones=" + telefones + ", contas=" + contas + "]";
 	}
-
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		
-		Cliente other = (Cliente) obj;
-		if (this.cpf == null) 
-		{
-			if (other.cpf != null)
-			{
-				return false;
-			}
-		} else if (!this.cpf.equals(other.cpf))
-		{
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
+		ClientePessoaJuridica other = (ClientePessoaJuridica) obj;
+		if (cnpj == null) {
+			if (other.cnpj != null)
+				return false;
+		} else if (!cnpj.equals(other.cnpj))
+			return false;
 		return true;
 	}
-	
-	
-	protected void adicionarContaCliente(IConta contaCliente)
+
+	public void adicionarContaCliente(IConta contaCliente)
 	{
 		this.contas.add(contaCliente);
 	}
@@ -98,5 +108,8 @@ public class Cliente {
 			System.out.println("Cliente nao tem o referido telefone");
 		}
 	}
+
 	
 }
+	
+

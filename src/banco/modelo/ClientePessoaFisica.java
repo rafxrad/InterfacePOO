@@ -1,26 +1,36 @@
 package banco.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Cliente {
+public class ClientePessoaFisica implements ICliente, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	String cpf;
 	String nome;
 	String dataNascimento;
-	
 	String email;
 	
 	HashSet<String> telefones = new HashSet<String>();
 	
 	private List<IConta> contas = new ArrayList<IConta>();
 	
-	public Cliente(String cpf, String nome, String dataNascimento) {
-		super();
+	public ClientePessoaFisica(String cpf, String nome, String dataNascimento, String email) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
+		this.email = email;
+	}
+	
+	public ClientePessoaFisica(String cpf)
+	{
+		this.cpf = cpf;
 	}
 
 	
@@ -31,7 +41,7 @@ public class Cliente {
 				+ telefones + ", contas=" + contas + "]";
 	}
 
-
+	
 
 	@Override
 	public int hashCode() {
@@ -43,23 +53,22 @@ public class Cliente {
 
 	@Override
 	public boolean equals(Object obj) {
-		
-		Cliente other = (Cliente) obj;
-		if (this.cpf == null) 
-		{
-			if (other.cpf != null)
-			{
-				return false;
-			}
-		} else if (!this.cpf.equals(other.cpf))
-		{
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
+		ClientePessoaFisica other = (ClientePessoaFisica) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
 		return true;
 	}
-	
-	
-	protected void adicionarContaCliente(IConta contaCliente)
+
+	public void adicionarContaCliente(IConta contaCliente)
 	{
 		this.contas.add(contaCliente);
 	}
@@ -98,5 +107,7 @@ public class Cliente {
 			System.out.println("Cliente nao tem o referido telefone");
 		}
 	}
+
+
 	
 }
