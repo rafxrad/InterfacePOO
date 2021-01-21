@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import banco.excecao.ClienteNaoEncontradoException;
+import banco.excecao.ClienteJaCadastradoException;
 import banco.modelo.ClientePessoaFisica;
 import banco.modelo.ClientePessoaJuridica;
 import banco.modelo.ICliente;
@@ -33,7 +33,7 @@ public class PersistenciaEmArquivoCliente implements IPersistenciaCliente{
 	}
 
 	@Override
-	public ICliente localizarClientePorCPF(String cpf) throws ClienteNaoEncontradoException{
+	public ICliente localizarClientePorCPF(String cpf) {
 		// TODO Auto-generated method stub
 		ICliente cliente = new ClientePessoaFisica(cpf);
 		
@@ -42,8 +42,7 @@ public class PersistenciaEmArquivoCliente implements IPersistenciaCliente{
 			int index = clientesCadastrados.indexOf(cliente);
 			cliente = clientesCadastrados.get(index);
 		}
-		else
-			throw new ClienteNaoEncontradoException("Cliente não encontrado!");
+
 		return cliente;
 	}
 

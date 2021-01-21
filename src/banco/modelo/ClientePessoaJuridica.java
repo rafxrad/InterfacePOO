@@ -13,36 +13,39 @@ public class ClientePessoaJuridica implements ICliente, Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	String cnpj;
-	String nome;
-	String dataNascimento;
+	String razaoSocial;
+	String nomeFantasia;
 	String email;
+	
 	
 	HashSet<String> telefones = new HashSet<String>();
 	
 	private List<IConta> contas = new ArrayList<IConta>();
 	
-	public ClientePessoaJuridica(String cnpj, String nome, String dataNascimento, String email) {
+	public ClientePessoaJuridica(String cnpj) {
 		this.cnpj = cnpj;
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
+		
+	}
+	
+
+	public ClientePessoaJuridica(String cnpj, String razaoSocial, String nomeFantasia, String email){
+		
+		super();
+		this.cnpj = cnpj;
+		this.razaoSocial = razaoSocial;
+		this.nomeFantasia = nomeFantasia;
 		this.email = email;
-	}
 	
-	public ClientePessoaJuridica(String cnpj)
-	{
-		this.cnpj = cnpj;
 	}
 
-	
 
 
-
-	
 	@Override
 	public String toString() {
-		return "ClientePessoaJuridica [cnpj=" + cnpj + ", nome=" + nome + ", dataNascimento=" + dataNascimento
+		return "ClientePessoaJuridica [cnpj=" + cnpj + ", razaoSocial=" + razaoSocial + ", nomeFantasia=" + nomeFantasia
 				+ ", email=" + email + ", telefones=" + telefones + ", contas=" + contas + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -51,6 +54,7 @@ public class ClientePessoaJuridica implements ICliente, Serializable {
 		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -69,12 +73,15 @@ public class ClientePessoaJuridica implements ICliente, Serializable {
 		return true;
 	}
 
+
 	public void adicionarContaCliente(IConta contaCliente)
 	{
 		this.contas.add(contaCliente);
+		System.out.println("Conta adicionada com sucesso!");
 	}
 	
 	public boolean contemContaCliente(IConta conta)
+	
 	{
 		return this.contas.contains(conta);
 	}
@@ -108,6 +115,7 @@ public class ClientePessoaJuridica implements ICliente, Serializable {
 			System.out.println("Cliente nao tem o referido telefone");
 		}
 	}
+
 
 	
 }
